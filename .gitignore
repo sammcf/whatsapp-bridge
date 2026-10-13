@@ -1,0 +1,11 @@
+private/
+data/
+.env
+__pycache__/
+bin/
+.openvisio/
+dist/
+.env.*
+*.pem
+*.key
+*.log

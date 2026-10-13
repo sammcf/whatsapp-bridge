@@ -1,0 +1,25 @@
+[Unit]
+Description=Restricted WhatsApp MCP reverse proxy
+Wants=waha.service waha-oauth.service
+After=waha.service waha-oauth.service
+StartLimitIntervalSec=0
+
+[Container]
+Image=docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+ContainerName=waha-proxy
+Network=host
+Volume=/var/mnt/stuff/development/whatsapp-bridge/deploy/nginx.conf:/etc/nginx/nginx.conf:ro,Z
+ReadOnly=true
+Volume=/var/mnt/stuff/development/whatsapp-bridge/private/agent-key.map:/etc/nginx/agent-key.map:ro,Z
+Tmpfs=/var/cache/nginx
+Tmpfs=/var/run
+Tmpfs=/tmp
+
+[Service]
+ExecStartPre=/usr/bin/mountpoint -q /var/mnt/stuff
+Restart=always
+RestartSec=5
+TimeoutStartSec=60
+
+[Install]
+WantedBy=default.target

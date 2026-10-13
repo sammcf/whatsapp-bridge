@@ -1,0 +1,30 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "whatsapp-bridge",
+  "version": "1.0.0",
+  "description": "Read and summarize your WhatsApp chats through your personal self-hosted bridge.",
+  "author": {
+    "name": "Sam"
+  },
+  "keywords": [
+    "whatsapp",
+    "messages"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "WhatsApp Bridge",
+        "shortDescription": "Read your WhatsApp chats",
+        "longDescription": "Connect to your personal WhatsApp bridge to read chats and summarize messages. Access is read-only.",
+        "developerName": "Sam",
+        "category": "Productivity",
+        "capabilities": [
+          "Read"
+        ],
+        "defaultPrompt": [
+          "Summarize my recent WhatsApp conversations."
+        ]
+      }
+    }
+  }
+}

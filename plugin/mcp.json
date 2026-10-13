@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "whatsapp": {
+      "type": "streamable-http",
+      "url": "https://fiddler.minotaur-altered.ts.net:8443/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "a55533f7faf7d55f9957ac9a54157601",
+              "tokenEndpointAuthMethod": "client_secret_post"
+            },
+            "authorizationUrl": "https://fiddler.minotaur-altered.ts.net:8443/.idp/auth",
+            "tokenUrl": "https://fiddler.minotaur-altered.ts.net:8443/.idp/token",
+            "authorizationServerBase": "https://fiddler.minotaur-altered.ts.net:8443/",
+            "resource": "https://fiddler.minotaur-altered.ts.net:8443/",
+            "baseScopes": [
+              "offline_access"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

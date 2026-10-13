@@ -1,0 +1,22 @@
+[Unit]
+Description=Persistent WhatsApp bridge
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Container]
+Image=docker.io/devlikeapro/waha@sha256:280bdc8f860267a2488a45d00ec88529646f7468c0bf0283c595d6efdd1b5e3b
+ContainerName=waha
+PublishPort=127.0.0.1:3030:3000
+EnvironmentFile=/var/mnt/stuff/development/whatsapp-bridge/private/waha.env
+Volume=/var/mnt/stuff/development/whatsapp-bridge/data/sessions:/app/.sessions:Z
+Volume=/var/mnt/stuff/development/whatsapp-bridge/data/media:/app/.media:Z
+
+[Service]
+ExecStartPre=/usr/bin/mountpoint -q /var/mnt/stuff
+Restart=always
+RestartSec=5
+TimeoutStartSec=120
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,22 @@
+[Unit]
+Description=OAuth authentication for WhatsApp MCP
+Wants=waha.service
+After=waha.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/var/mnt/stuff/development/whatsapp-bridge
+EnvironmentFile=/var/mnt/stuff/development/whatsapp-bridge/private/oauth.env
+ExecStartPre=/usr/bin/mountpoint -q /var/mnt/stuff
+ExecStart=/var/mnt/stuff/development/whatsapp-bridge/bin/mcp-auth-proxy --listen 127.0.0.1:3033 --no-auto-tls --external-url https://fiddler.minotaur-altered.ts.net:8443 --data-path /var/mnt/stuff/development/whatsapp-bridge/data/oauth --trusted-proxies 127.0.0.1/32 http://127.0.0.1:3030
+Restart=always
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+# Upstream logs full OAuth query strings; keep authorization codes out of journals.
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=default.target

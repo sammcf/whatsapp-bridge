@@ -1,0 +1,16 @@
+[Unit]
+Description=Restore public HTTPS access to WhatsApp MCP
+Wants=waha-proxy.service
+After=waha-proxy.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/tailscale funnel --bg --https=8443 --yes http://127.0.0.1:3031
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=15
+TimeoutStartSec=30
+
+[Install]
+WantedBy=default.target
